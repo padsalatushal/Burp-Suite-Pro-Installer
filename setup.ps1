@@ -1,6 +1,33 @@
-# install java 8 
-winget install Oracle.JavaRuntimeEnvironment
+# Check if winget is installed or not. if not then it install winget according to system
 
+$wingetInstalled = Get-Command -Name winget -ErrorAction SilentlyContinue
+if ($wingetInstalled) {
+    Write-Host "winget is already installed on this system."
+} else {
+    Write-Host "winget is not installed on this system. Installing now..."
+
+    Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+    Install-Script -Name winget-install -Force
+    winget-install.ps1
+        
+    # Check if winget is now installed
+    $wingetInstalled = Get-Command -Name winget -ErrorAction SilentlyContinue
+    if ($wingetInstalled) {
+        Write-Host "winget has been successfully installed."
+    } else {
+        Write-Host "Failed to install winget."
+    }
+}
+
+
+
+# install java 8 
+try {
+    winget install -e --id Oracle.JavaRuntimeEnvironment   
+}
+catch {
+    Write-host "Failed to install java 8. Install it Mannually."
+}
 
 # Downloading Burp_Suite_Professional_1.7.37 and Burp suite loader
 Write-Host "Downloading Burp_Suite_Professional_1.7.37"
