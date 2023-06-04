@@ -12,7 +12,7 @@ if ($wingetInstalled) {
     Write-Host "winget is already installed on this system."
 } else {
     Write-Host "winget is not installed on this system. Installing now..."
-
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
     Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
     Install-Script -Name winget-install -Force
     winget-install.ps1
