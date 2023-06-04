@@ -1,3 +1,10 @@
+
+# Check for admin 
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Output "Needs to be ran as Administrator. Attempting to relaunch."
+    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex"
+    break
+}
 # Check if winget is installed or not. if not then it install winget according to system
 
 $wingetInstalled = Get-Command -Name winget -ErrorAction SilentlyContinue
@@ -21,7 +28,7 @@ if ($wingetInstalled) {
 
 
 
-# install java 8 
+# Install java 8 with winget
 try {
     winget install -e --id Oracle.JavaRuntimeEnvironment   
 }
@@ -38,14 +45,14 @@ New-Item -ItemType Directory -Force -Path $folderPath
 $outputFilePath = Join-Path $folderPath "burpsuite_pro_v1.7.37.jar"
 Invoke-WebRequest -Uri $url -OutFile $outputFilePath
 
-# Downloading Loader 
-Write-Host "Downloading burp-loader-keygen.jar"
+# Downloading Burp Loader Keygen
+Write-Host "Downloading Burp loader keygen"
 $loader_url = "https://github.com/padsalatushal/Burp-Suite-Pro-Installer/raw/main/burp-loader-keygen.jar"
 $loader_outputFilePath = Join-Path $folderPath "burp-loader-keygen.jar"
 Invoke-WebRequest -Uri $loader_url -OutFile $loader_outputFilePath
 
 
-# creating bat file 
+# Creating bat file 
 $batFilePath = [Environment]::GetFolderPath('Desktop') + '\burp.bat'
 
 if (Test-Path $batFilePath) {
