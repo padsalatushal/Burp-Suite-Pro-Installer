@@ -1,4 +1,4 @@
-
+# test
 # Check for admin 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Output "Needs to be ran as Administrator. Attempting to relaunch."
