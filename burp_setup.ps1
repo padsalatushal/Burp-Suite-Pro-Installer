@@ -62,8 +62,9 @@ if (Test-Path $batFilePath) {
 $batCommands = @"
 @echo off
 echo Starting Burp Suite...
-"C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -jar %USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\burp-loader-keygen.jar &
-"C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -jar %USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\burpsuite_pro_v1.7.37.jar &
+start /B "" "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -jar %USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\burpsuite_pro_v1.7.37.jar 
+start /B "" "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -jar "%USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\burp-loader-keygen.jar"
 "@
 
 Set-Content -Path $batFilePath -Value $batCommands
+pos
