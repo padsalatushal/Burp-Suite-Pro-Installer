@@ -1,14 +1,15 @@
 # Check for admin 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Output "Needs to be ran as Administrator. Attempting to relaunch."
-    Start-Process -Verb runas -FilePath powershell.exe -ExecutionPolicy Bypass -Command "iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex"
+    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "-ExecutionPolicy Bypass -Command `"iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex`""
+
     break
 }
 
 # check for execution policy 
 $executionPolicy = Get-ExecutionPolicy
 if ($executionPolicy -ne "Bypass") {
-    Start-Process -Verb runas -FilePath powershell.exe -ExecutionPolicy Bypass -Command "iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex"
+    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "-ExecutionPolicy Bypass -Command `"iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex`""
     break     
 }
 
