@@ -1,12 +1,19 @@
-# test
 # Check for admin 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Output "Needs to be ran as Administrator. Attempting to relaunch."
-    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex"
+    Start-Process -Verb runas -FilePath powershell.exe -ExecutionPolicy Bypass -Command "iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex"
     break
 }
-# Check if winget is installed or not. if not then it install winget according to system
 
+# check for execution policy 
+$executionPolicy = Get-ExecutionPolicy
+if ($executionPolicy -ne "Bypass") {
+    Start-Process -Verb runas -FilePath powershell.exe -ExecutionPolicy Bypass -Command "iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex"
+    break     
+}
+
+<#
+# Check if winget is installed or not. if not then it install winget according to system
 $wingetInstalled = Get-Command -Name winget -ErrorAction SilentlyContinue
 if ($wingetInstalled) {
     Write-Host "winget is already installed on this system."
@@ -35,6 +42,23 @@ try {
 catch {
     Write-host "Failed to install java 8. Install it Mannually."
 }
+#>
+
+
+
+# Check JRE-8 Availability or Download JRE-8
+$jre8 = Get-WmiObject -Class Win32_Product -filter "Vendor='Oracle Corporation'" |where Caption -clike "Java 8 Update *"
+if (!($jre8)){
+    echo "`n`t`tDownloading Java JRE ...."
+    wget "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248242_ce59cff5c23f4e2eaf4e778a117d4c5b" -O jre-8.exe
+    echo "`n`t`tJRE-8 Downloaded, lets start the Installation process"
+    start -wait jre-8.exe
+    rm jre-8.exe
+}else{
+    echo "`n`nRequired JRE-8 is Installed`n"
+    $jre8
+}
+
 
 # Downloading Burp_Suite_Professional_1.7.37 and Burp suite loader
 Write-Host "Downloading Burp_Suite_Professional_1.7.37"
@@ -51,7 +75,7 @@ $loader_url = "https://github.com/padsalatushal/Burp-Suite-Pro-Installer/raw/mai
 $loader_outputFilePath = Join-Path $folderPath "burp-loader-keygen.jar"
 Invoke-WebRequest -Uri $loader_url -OutFile $loader_outputFilePath
 
-
+<#
 # Creating bat file 
 $batFilePath = [Environment]::GetFolderPath('Desktop') + '\burp.bat'
 
@@ -67,4 +91,4 @@ start /B "" "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" 
 "@
 
 Set-Content -Path $batFilePath -Value $batCommands
-pos
+#>
