@@ -17,5 +17,5 @@ jobs:
         source_file: 'burp_setup.ps1'
         destination_repo: 'padsalatushal/padsalatushal.github.io'
         user_email: 'padsalatushal@email.com' # your email
-        user_name: 'padsalatushal'           # your login
+        user_name: 'github-bot'           # your login
         commit_message: 'update from source repo'
