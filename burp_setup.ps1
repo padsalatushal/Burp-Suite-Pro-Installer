@@ -76,7 +76,7 @@ $loader_url = "https://github.com/padsalatushal/Burp-Suite-Pro-Installer/raw/mai
 $loader_outputFilePath = Join-Path $folderPath "burp-loader-keygen.jar"
 Invoke-WebRequest -Uri $loader_url -OutFile $loader_outputFilePath
 
-
+<#
 # Creating bat file 
 $batFilePath = [Environment]::GetFolderPath('Desktop') + '\burp.bat'
 
@@ -93,3 +93,19 @@ pause
 "@
 
 Set-Content -Path $batFilePath -Value $batCommands
+
+#>
+Write-Host "Creating Shortcut.."
+$programPath =  [Environment]::GetFolderPath('Desktop') + '\Burp_Suite_Professional_1.7.37\burp-loader-keygen.jar'
+$shortcutPath = [Environment]::GetFolderPath('Desktop') + "\Burp Suite.lnk"
+$startInValue = [Environment]::GetFolderPath('Desktop') + '\Burp_Suite_Professional_1.7.37\'
+
+$WshShell = New-Object -ComObject WScript.Shell
+$shortcut = $WshShell.CreateShortcut($shortcutPath)
+$shortcut.TargetPath = $programPath
+$shortcut.WorkingDirectory = $startInValue
+$shortcut.Save()
+
+Write-Host "Shortcut created successfully."
+
+Write-Host "Done"
