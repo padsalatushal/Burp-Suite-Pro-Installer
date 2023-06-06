@@ -76,7 +76,7 @@ $loader_url = "https://github.com/padsalatushal/Burp-Suite-Pro-Installer/raw/mai
 $loader_outputFilePath = Join-Path $folderPath "burp-loader-keygen.jar"
 Invoke-WebRequest -Uri $loader_url -OutFile $loader_outputFilePath
 
-<#
+
 # Creating bat file 
 $batFilePath = [Environment]::GetFolderPath('Desktop') + '\burp.bat'
 
@@ -87,9 +87,9 @@ if (Test-Path $batFilePath) {
 $batCommands = @"
 @echo off
 echo Starting Burp Suite...
-start /B "" "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -jar %USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\burpsuite_pro_v1.7.37.jar 
+cd "%USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\"
 start /B "" "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -jar "%USERPROFILE%\Desktop\Burp_Suite_Professional_1.7.37\burp-loader-keygen.jar"
+pause
 "@
 
 Set-Content -Path $batFilePath -Value $batCommands
-#>
