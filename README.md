@@ -4,13 +4,11 @@
 - This script install Burp Suite Pro v1.7.37
 - Activate Burp Suite Pro with Key-Generator and Key-Loader
 
-## Demo
 
-
-https://github.com/padsalatushal/Burp-Suite-Pro-Installer/assets/57517785/0159ee18-cad3-4e4b-9b04-743e39e4f040
 
 
 ## Installtion
+https://github.com/padsalatushal/Burp-Suite-Pro-Installer/assets/57517785/0159ee18-cad3-4e4b-9b04-743e39e4f040
 
 Launch Command (Powershell) :
 ```bash
