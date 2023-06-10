@@ -107,5 +107,5 @@ $shortcut.WorkingDirectory = $startInValue
 $shortcut.Save()
 
 Write-Host "Shortcut created successfully."
-
+Start-Process -FilePath "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -ArgumentList "-jar ""$env:USERPROFILE\Desktop\Burp_Suite_Professional_1.7.37\burp-loader-keygen.jar""" -NoNewWindow -Wait
 Write-Host "Done"
