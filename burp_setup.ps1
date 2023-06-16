@@ -57,7 +57,6 @@ if (!($jre8)){
     rm jre-8.exe
 }else{
     echo "`n`nRequired JRE-8 is Installed`n"
-    $jre8
 }
 
 <#
