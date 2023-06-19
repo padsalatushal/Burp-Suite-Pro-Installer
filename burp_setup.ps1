@@ -77,10 +77,10 @@ while ($test -eq "") {
     Write-Host "1. Burp Suite Pro latest (2022.12.2)"
     Write-Host "2. Burp Suite Pro old (1.7.37)"
 
-    $input = Read-Host "Enter your choice"
+    $choice_var = Read-Host "Enter your choice"
 
-    if ($validOptions -contains $input) {
-        $test = $input
+    if ($validOptions -contains $choice_var) {
+        $test = $choice_var
     } else {
         Write-Host "Invalid option. Please choose a valid option."
     }
