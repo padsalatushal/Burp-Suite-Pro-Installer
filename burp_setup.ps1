@@ -114,6 +114,7 @@ if ($test -eq "2022.12.2") {
     Write-Host "Downloading Burp Suite Pro latest (2022.12.2)"
     Start-BitsTransfer -Source $url -Destination $outputFilePath
     Write-Host "Under Development. For now 1.7.37 is working fine. "
+    Pause
     exit
 }
 elseif ($test -eq "1.7.37") {
@@ -177,3 +178,4 @@ Write-Host "Shortcut created successfully."
 cd $env:USERPROFILE\Desktop\Burp_Suite_Professional_1.7.37\
 Start-Process -FilePath "C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe" -ArgumentList "-jar ""$env:USERPROFILE\Desktop\Burp_Suite_Professional_1.7.37\burp-loader-keygen.jar""" -NoNewWindow -Wait
 Write-Host "Done"
+Pause
