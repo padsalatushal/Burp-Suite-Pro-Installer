@@ -48,6 +48,7 @@ catch {
 
 
 # Check JRE-8 Availability or Download JRE-8
+Write-Host "Checking for JRE-8 Availability"
 $jre8 = Get-WmiObject -Class Win32_Product -filter "Vendor='Oracle Corporation'" |where Caption -clike "Java 8 Update *"
 if (!($jre8)){
     echo "`n`t`tDownloading Java JRE ...."
@@ -74,8 +75,8 @@ $test = ""
 
 while ($test -eq "") {
     Write-Host "Choose an option:"
-    Write-Host "1. Burp Suite Pro latest (2022.12.2)"
-    Write-Host "2. Burp Suite Pro old (1.7.37)"
+    Write-Host "1. Burp Suite Pro old (1.7.37)"
+    Write-Host "2. Burp Suite Pro latest (2022.12.2)"
 
     $choice_var = Read-Host "Enter your choice"
 
@@ -87,8 +88,8 @@ while ($test -eq "") {
 }
 
 switch ($test) {
-    "1" { $test = "2022.12.2" }
-    "2" { $test = "1.7.37" }
+    "1" { $test = "1.7.37" }
+    "2" { $test = "2022.12.2" }
 }
 
 Write-Host "Selected option: $test"
@@ -112,6 +113,8 @@ if ($test -eq "2022.12.2") {
 
     Write-Host "Downloading Burp Suite Pro latest (2022.12.2)"
     Start-BitsTransfer -Source $url -Destination $outputFilePath
+    Write-Host "Under Development. For now 1.7.37 is working fine. "
+    exit
 }
 elseif ($test -eq "1.7.37") {
     $url = "https://portswigger.net/burp/releases/startdownload?product=pro&version=1.7.37&type=Jar"
