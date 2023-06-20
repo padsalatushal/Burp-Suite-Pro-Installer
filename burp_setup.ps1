@@ -52,10 +52,10 @@ Write-Host "Checking for JRE-8 Availability"
 $jre8 = Get-WmiObject -Class Win32_Product -filter "Vendor='Oracle Corporation'" |where Caption -clike "Java 8 Update *"
 if (!($jre8)){
     echo "`n`t`tDownloading Java JRE ...."
-    wget "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248242_ce59cff5c23f4e2eaf4e778a117d4c5b" -O jre-8.exe
-    echo "`n`t`tJRE-8 Downloaded, lets start the Installation process"
-    start -wait jre-8.exe
-    rm jre-8.exe
+    Start-BitsTransfer -Source "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248242_ce59cff5c23f4e2eaf4e778a117d4c5b" -Destination "jre-8.exe"
+    echo "`n`t`tJRE-8 Downloaded, let's start the Installation process"
+    Start-Process -Wait -FilePath .\jre-8.exe
+    Remove-Item .\jre-8.exe    
 }else{
     echo "`n`nRequired JRE-8 is Installed`n"
 }
