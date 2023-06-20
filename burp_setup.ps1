@@ -136,13 +136,20 @@ elseif ($test -eq "1.7.37") {
 
     Write-Host "Downloading Burp Suite Pro old (1.7.37)"
     Start-BitsTransfer -Source $url -Destination $outputFilePath
+
+    # Downloading Burp Loader Keygen
+    $loader_url = "https://github.com/padsalatushal/Burp-Suite-Pro-Installer/raw/main/burp-loader-keygen.jar"
+    $loader_outputFilePath = Join-Path $folderPath "burp-loader-keygen.jar"
+    # Remove existing file if it exists
+    if (Test-Path $loader_outputFilePath) {
+        Write-Host "Deleting Existing loader File"
+        Remove-Item $loader_outputFilePath -Force
+    }
+    Write-Host "Downloading Burp loader keygen"
+    Start-BitsTransfer -Source $loader_url -Destination $loader_outputFilePath
+
 }
 
-# Downloading Burp Loader Keygen
-Write-Host "Downloading Burp loader keygen"
-$loader_url = "https://github.com/padsalatushal/Burp-Suite-Pro-Installer/raw/main/burp-loader-keygen.jar"
-$loader_outputFilePath = Join-Path $folderPath "burp-loader-keygen.jar"
-Invoke-WebRequest -Uri $loader_url -OutFile $loader_outputFilePath
 
 <#
 # Creating bat file 
