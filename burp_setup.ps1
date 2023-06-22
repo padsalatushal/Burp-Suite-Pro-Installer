@@ -46,20 +46,6 @@ catch {
 #>
 
 
-
-# Check JRE-8 Availability or Download JRE-8
-Write-Host "Checking for JRE-8 Availability"
-$jre8 = Get-WmiObject -Class Win32_Product -filter "Vendor='Oracle Corporation'" |where Caption -clike "Java 8 Update *"
-if (!($jre8)){
-    echo "`n`t`tDownloading Java JRE ...."
-    Start-BitsTransfer -Source "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248242_ce59cff5c23f4e2eaf4e778a117d4c5b" -Destination "jre-8.exe"
-    echo "`n`t`tJRE-8 Downloaded, let's start the Installation process"
-    Start-Process -Wait -FilePath .\jre-8.exe
-    Remove-Item .\jre-8.exe    
-}else{
-    echo "`n`nRequired JRE-8 is Installed`n"
-}
-
 <#
 # Downloading Burp_Suite_Professional_1.7.37 and Burp suite loader
 Write-Host "Downloading Burp_Suite_Professional_1.7.37"
@@ -118,6 +104,21 @@ if ($test -eq "2022.12.2") {
     exit
 }
 elseif ($test -eq "1.7.37") {
+
+    # Check JRE-8 Availability or Download JRE-8
+    Write-Host "Checking for JRE-8 Availability"
+    $jre8 = Get-WmiObject -Class Win32_Product -filter "Vendor='Oracle Corporation'" | where Caption -clike "Java 8 Update *"
+    if (!($jre8)){
+        echo "`n`t`tDownloading Java JRE ...."
+        Start-BitsTransfer -Source "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248242_ce59cff5c23f4e2eaf4e778a117d4c5b" -Destination "jre-8.exe"
+        echo "`n`t`tJRE-8 Downloaded, let's start the Installation process"
+        Start-Process -Wait -FilePath .\jre-8.exe
+        Remove-Item .\jre-8.exe    
+    }else{
+        echo "`n`nRequired JRE-8 is Installed`n"
+    }
+
+
     $url = "https://portswigger.net/burp/releases/startdownload?product=pro&version=1.7.37&type=Jar"
     $folderPath = Join-Path -Path $env:USERPROFILE -ChildPath "Desktop\Burp_Suite_Professional_1.7.37"
 
@@ -147,6 +148,8 @@ elseif ($test -eq "1.7.37") {
     }
     Write-Host "Downloading Burp loader keygen"
     Start-BitsTransfer -Source $loader_url -Destination $loader_outputFilePath
+
+
 
 }
 
