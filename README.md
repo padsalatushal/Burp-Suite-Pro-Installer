@@ -17,7 +17,7 @@ irm burp.bughub.live | iex
 Or
 
 ```bash
-iwr -useb burp.bughub.live | iex
+iwr -useb https://padsalatushal.github.io/burp_setup.ps1 | iex
 ```
 
 If you are having TLS 1.2 Issues or You cannot find or resolve host then run with the following command:
